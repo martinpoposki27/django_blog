@@ -1,0 +1,76 @@
+{% extends 'blog/base.html' %}
+    {% block content %}
+        <h2 class="mt-3 mb-5">About you</h2>
+        <div class="container mt-3 mb-5">
+            <div class="row">
+                <div class="col-4">
+                    <img class="img-thumbnail profile-img" src="{{MEDIA_URL}}{{blogger.profile_img.url}}"/>
+                </div>
+                <div class="col-4">
+                    <p>
+                        <strong>{{blogger.name}}</strong>
+                    </p>
+                    <p>
+                        <strong>{{blogger.surname}}</strong>
+                    </p>
+                </div>
+                <div class="col-4">
+                    <p>
+                        <strong>{{blogger.interests}}</strong>
+                    </p>
+                    <p>
+                        <strong>{{blogger.skills}}</strong>
+                    </p>
+                    <p>
+                        <strong>{{blogger.occupation}}</strong>
+                    </p>
+                </div>
+            </div>
+            <!-- <div class="row">
+                <div class="col-4">
+                    <form action="." method="POST">
+                        {% csrf_token %}
+                        {{ form.profile_img }}
+                        <button class="btn btn-primary" type="submit">Change image</button>
+                    </form>
+                </div>
+            </div> -->
+            <div class="row mt-3">
+                <div class="col-10"></div>
+                <div class="col-2">
+                    <a class="btn btn-outline-danger" href="{% url 'block_user' %}">Blocked users</a>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="mt-3 mb-5">Posts by you</h2>
+        <div class="mt-3 col-10 mx-auto justify-content-center">
+            <div class="row">
+                <a href="{% url 'write_post' %}" class="btn btn-outline-primary fw-bold">Add new post</a>
+            </div>
+        </div>
+        {% for post in posts %}
+        <div class="card m-3">
+            <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>
+
+                <p class="card-text">{{ post.intro }}</p>
+            </div>
+            <div class="card-footer container">
+                <div class="row">
+                    <div class="col-2">
+                        <a class="btn btn-outline-primary" href="{% url 'post_detail' post.slug %}">Read more</a>
+                    </div>
+                    <div class="col"></div>
+                    <div class="col-7 container pt-3">
+                        <div class="row">
+                            <div class="col-4"></div>
+                            <div class="col-3 justify-content-end"><small>Posted by <strong> {{ post.blogger }} </strong> </small></div>
+                            <div class="col-5 justify-content-end"><small>Posted at {{ post.date_added }}</small></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>    
+        {% endfor %}
+{% endblock %}

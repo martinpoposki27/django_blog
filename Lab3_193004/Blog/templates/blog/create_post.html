@@ -1,0 +1,17 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <div class="col-7">
+        <h2 class="subtitle mt-3 mb-3">Write post</h2>
+
+        <form method="post" action=".">
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <div class="form-group mt-5 mb-5">
+                <button type="submit" class="btn btn-primary form-control">Submit</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<div class="row">
+    <h1 class="title mt-3 mb-3">{{ post.title }}</h1>
+    <div class="text-muted mb-5">
+        <small>Posted on {{ post.date_added }}</small>
+        <small>Posted by {{ post.blogger }}</small>
+    </div>
+</div>
+<div class="row">
+    <div class="col-8 pe-5">
+        <div>
+            <p class="text-muted"><strong>{{ post.intro }}</strong></p>
+        </div>
+        <div class="ps-2 pe-5">
+            <p class="text">{{ post.body }}</p>
+        </div>
+        <hr>
+    </div>
+
+    <div class="col-4 ps-5">
+        <h4 class="subtitle mb-3">Comments</h4>
+
+        {% for comment in post.comments.all %}
+            <div class="card mb-3">
+                <div class="card-header">
+                    <strong class="text-primary">{{ comment.blogger }}</strong> 
+                    <small class="text-muted">{{ comment.date_added }}</small>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{ comment.body }}</p>
+                </div>
+            </div>
+        {% empty %}
+            <div class="notification">
+                <p>No comments yet!</p>
+            </div>
+        {% endfor %}
+
+        <hr>
+
+        <h6 class="subtitle mt-3 mb-3">Add comment</h6>
+
+        <form method="post" action="." class="form">
+            {% csrf_token %}
+
+            {{ form.body }}
+
+            <div class="field form-group">
+                <div class="control mt-3">
+                    <button class="btn btn-outline-primary">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
