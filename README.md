@@ -2,11 +2,13 @@
 
 How to start an app with django:
 
-  django-admin startproject <projectname>
+  cd //location
+
+  django-admin startproject projectname
   
-  cd <projectname>
+  cd projectname
   
-  python manage.py startapp <appname>
+  python manage.py startapp appname
   
   python manage.py makemigrations
   
